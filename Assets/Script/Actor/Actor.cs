@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using tekill;
+using StatsActor;
 
 public class Actor : MonoBehaviour {
-    public StatsActor a = new StatsActor();
+    public BaseStatsActors a = new BaseStatsActors();
 
     void start() {
         a.Strength = 2;
