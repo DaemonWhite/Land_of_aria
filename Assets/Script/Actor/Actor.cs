@@ -10,10 +10,4 @@ public class Actor : MonoBehaviour {
     void start() {
         a.Strength = 2;
     }
-    void Update() {
-        
-        
-        Debug.Log("Strength " + a.Strength);
-        a.Strength += 1;
-    }
 }
