@@ -4,22 +4,31 @@ using UnityEngine;
 
 public class PlayerCamCtrl : MonoBehaviour
 {
-
-    [SerializeField] Camera playercamera;
-    private const float Speed_h = 100f;
-    private const float Speed_v = 100f;
+    public GameObject target;
+    private float targetDistance;
+    private const float speedTurnHori = 100f;
+    private const float speedTurnVerti = 100f;
     // Start is called before the first frame update
+
+    private float rotX;
+
+    public float minTurnVertic = -90.0f;
+    public float maxTurnVertic = 90.0f;
     void Start()
     {
-        
+         targetDistance = Vector3.Distance(transform.position, target.transform.position);
+         Debug.Log(targetDistance);
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up * Input.GetAxisRaw ("Mouse X"));
-        transform.Rotate(Vector3.right * Input.GetAxisRaw ("Mouse Y"));
-        transform.Translate(Vector3.forward * 6f * Input.GetAxis("Mouse ScrollWheel"));
+        float y = Input.GetAxis("Mouse X") * speedTurnHori;
+        rotX += Input.GetAxis("Mouse Y") * speedTurnVerti;
+        
+        rotX = Mathf.Clamp(rotX, minTurnVertic, maxTurnVertic);
+
+        transform.eulerAngles = new Vector3(-rotX, transform.eulerAngles.y + y, 0);
     }
 
     void FixedUpdate() {

@@ -7,6 +7,8 @@ public class PlayerScript : MonoBehaviour
     private const float Speed = 2f;
     private const float SpeedShift = 6f;
     private bool isJumping = false;
+
+    private float moveOn = 1;
     [SerializeField] Rigidbody rigidbody;
     // Start is called before the first frame update
 
@@ -29,18 +31,18 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
+    public void rotatePlayer() {
+        
+    }
+
     void FixedUpdate() {
-        float translation_z = Speed * Time.fixedDeltaTime;
-        float translation_y = translation_z;
-        float translation_x = translation_z + 1f;
+        Vector3 translation = new Vector3(0,0,0);
+        translation.z = Input.GetAxis("Vertical");
+        translation.x = Input.GetAxis("Horizontal");
 
-
-        translation_z *= Input.GetAxis("Vertical");
-        translation_y *= Input.GetAxis("Horizontal");
         jump();
 
-        transform.Rotate(Vector3.right * Input.GetAxisRaw ("Mouse X"));
-        rigidbody.AddForce(Vector3.forward * 6f * translation_z, ForceMode.Impulse);
-        rigidbody.AddForce(Vector3.right * 6f * translation_y, ForceMode.Impulse);
+        // transform.Rotate(Vector3.right * Input.GetAxisRaw ("Mouse X"));
+        transform.Translate(translation *  Speed * Time.fixedDeltaTime * moveOn);
     }
 }
