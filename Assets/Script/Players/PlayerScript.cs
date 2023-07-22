@@ -31,8 +31,8 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    public void rotatePlayer() {
-        
+    public void rotatePlayer(float rotY) {
+        transform.eulerAngles = new Vector3(0, rotY, 0);
     }
 
     void FixedUpdate() {
